@@ -32,7 +32,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
   let backgroundView = UIImageView()
 
   lazy private var dataSource: RestaurantTableViewDataSource = {
-    fatalError("Unimplemented")
+    return dataSourceForQuery(baseQuery)
   }()
 
   fileprivate var query: Query? {
@@ -48,11 +48,19 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
   }
 
   private func dataSourceForQuery(_ query: Query) -> RestaurantTableViewDataSource {
-    fatalError("Unimplemented")
+    return RestaurantTableViewDataSource(query: query) { [unowned self] (changes) in
+      if self.dataSource.count > 0 {
+        self.tableView.backgroundView = nil
+      } else {
+        self.tableView.backgroundView = self.backgroundView
+      }
+
+      self.tableView.reloadData()
+    }
   }
 
   private lazy var baseQuery: Query = {
-    fatalError("Unimplemented")
+    return Firestore.firestore().collection("restaurants").limit(to: 50)
   }()
 
   lazy private var filters: (navigationController: UINavigationController,
@@ -71,6 +79,7 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
     activeFiltersStackView.isHidden = true
     tableView.delegate = self
     // TODO: assign our data source
+    tableView.dataSource = dataSource
 
     self.navigationController?.navigationBar.barStyle = .black
 
@@ -82,10 +91,12 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.setNeedsStatusBarAppearanceUpdate()
+    dataSource.startUpdates()
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    dataSource.stopUpdates()
   }
 
   deinit {
