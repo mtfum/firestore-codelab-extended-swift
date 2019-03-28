@@ -116,7 +116,16 @@ class ProfileViewController: UIViewController {
   }
 
   fileprivate func populateReviews(forUser user: User) {
-
+    let query = Firestore.firestore().reviews.whereField("userInfo.userID", isEqualTo: user.userID)
+    dataSource = ReviewTableViewDataSource(query: query) { [unowned self] (changes) in
+      self.tableView.reloadData()
+      guard let dataSource = self.dataSource else { return }
+      if dataSource.count > 0 {
+        self.tableView.backgroundView = nil
+      } else {
+        self.tableView.backgroundView = self.tableBackgroundLabel
+      }
+    }
     dataSource?.sectionTitle = "My reviews"
     dataSource?.startUpdates()
     tableView.dataSource = dataSource
