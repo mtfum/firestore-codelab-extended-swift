@@ -53,7 +53,37 @@ class ReviewTableViewCell: UITableViewCell {
   }
 
   @IBAction func yumWasTapped(_ sender: Any) {
-
+    let reviewReference = Firestore.firestore().collection("reviews").document(review.documentID)
+    reviewReference.getDocument { (snapshot, error) in
+      if let error = error {
+        print("Got an error fetching the document: \(error)")
+        return
+      }
+      guard let snapshot = snapshot else { return }
+      guard let review = Review(document: snapshot) else { return }
+      print("Right now, this review has \(review.yumCount) yums")
+      let newYumCount = review.yumCount + 1
+      // The rest of the code will go here!
+      guard let currentUser = Auth.auth().currentUser else { return }
+      // First we are going to write a simple "Yum" object into our subcollection...
+      let newYum = Yum(documentID: currentUser.uid, username: currentUser.displayName ?? "Unknown user")
+      let newYumReference = reviewReference.collection("yums").document(newYum.documentID)
+      newYumReference.setData(newYum.documentData, completion: { (error) in
+        if let error = error {
+          print("Got an error adding the new yum document: \(error)")
+        } else {
+          print("Document set successfully")
+          // TODO: Update the yumCount here
+          reviewReference.updateData(["yumCount": newYumCount]) { (error) in
+            if let error = error {
+              print("Got an error updating the review count: \(error)")
+            } else {
+              print("yumCount incremented successfully")
+            }
+          }
+        }
+      })
+    }
   }
 
 }
