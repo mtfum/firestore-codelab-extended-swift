@@ -1,0 +1,138 @@
+[debug] [2019-03-30T06:10:08.107Z] ----------------------------------------------------------------------
+[debug] [2019-03-30T06:10:08.114Z] Command:       /Users/fumiya.yamanaka/.nodebrew/node/v10.10.0/bin/node /Users/fumiya.yamanaka/.nodebrew/current/bin/firebase deploy --debug
+[debug] [2019-03-30T06:10:08.115Z] CLI Version:   6.5.0
+[debug] [2019-03-30T06:10:08.115Z] Platform:      darwin
+[debug] [2019-03-30T06:10:08.115Z] Node Version:  v10.10.0
+[debug] [2019-03-30T06:10:08.120Z] Time:          Sat Mar 30 2019 13:10:08 GMT+0700 (Indochina Time)
+[debug] [2019-03-30T06:10:08.120Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-30T06:10:08.134Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-30T06:10:08.134Z] > authorizing via signed-in user
+[debug] [2019-03-30T06:10:08.135Z] [iam] checking project cloud-firestore-workshop-bbac5 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2019-03-30T06:10:08.136Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/cloud-firestore-workshop-bbac5:testIamPermissions  
+
+[debug] [2019-03-30T06:10:09.524Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'cloud-firestore-workshop-bbac5'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix $RESOURCE_DIR run lint
+[info] Running command: npm --prefix $RESOURCE_DIR run build
+[error] 
+[error] Error: functions predeploy error: Command terminated with non-zero exit code2
+[debug] [2019-03-30T06:13:59.189Z] ----------------------------------------------------------------------
+[debug] [2019-03-30T06:13:59.192Z] Command:       /Users/fumiya.yamanaka/.nodebrew/node/v10.10.0/bin/node /Users/fumiya.yamanaka/.nodebrew/current/bin/firebase deploy --debug
+[debug] [2019-03-30T06:13:59.193Z] CLI Version:   6.5.0
+[debug] [2019-03-30T06:13:59.193Z] Platform:      darwin
+[debug] [2019-03-30T06:13:59.193Z] Node Version:  v10.10.0
+[debug] [2019-03-30T06:13:59.194Z] Time:          Sat Mar 30 2019 13:13:59 GMT+0700 (Indochina Time)
+[debug] [2019-03-30T06:13:59.194Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-30T06:13:59.203Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-30T06:13:59.203Z] > authorizing via signed-in user
+[debug] [2019-03-30T06:13:59.203Z] [iam] checking project cloud-firestore-workshop-bbac5 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2019-03-30T06:13:59.205Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/cloud-firestore-workshop-bbac5:testIamPermissions  
+
+[debug] [2019-03-30T06:14:00.493Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'cloud-firestore-workshop-bbac5'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix $RESOURCE_DIR run lint
+[info] Running command: npm --prefix $RESOURCE_DIR run build
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2019-03-30T06:14:07.946Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "./node_modules/.bin/tslint -p tslint.json",
+    "build": "./node_modules/.bin/tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^7.0.0",
+    "firebase-functions": "^2.2.1"
+  },
+  "devDependencies": {
+    "tslint": "^5.8.0",
+    "typescript": "^3.4.1"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-03-30T06:14:07.948Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/cloud-firestore-workshop-bbac5?view=CONSUMER_VIEW  
+ 
+[debug] [2019-03-30T06:14:07.949Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/cloud-firestore-workshop-bbac5?view=CONSUMER_VIEW  
+ 
+[debug] [2019-03-30T06:14:10.141Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:14:10.162Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2019-03-30T06:14:10.163Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/cloud-firestore-workshop-bbac5  
+ 
+[debug] [2019-03-30T06:14:11.566Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:14:11.568Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/189243123593:getServerAppConfig  
+ 
+[debug] [2019-03-30T06:14:12.077Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2019-03-30T06:14:12.081Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/cloud-firestore-workshop-bbac5/configs  
+ 
+[debug] [2019-03-30T06:14:12.691Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (35.69 KB) for uploading
+[debug] [2019-03-30T06:14:12.899Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/cloud-firestore-workshop-bbac5/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2019-03-30T06:15:01.947Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:01.950Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-6f0f2bf8-b103-430c-b3ae-046ef28e821a/02e420b0-b806-44d3-8359-b75e1f425706.zip?GoogleAccessId=service-189243123593@gcf-admin-robot.iam.gserviceaccount.com&Expires=1553928301&Signature=SnmuuJzEWEJmWj7MSvR63Etkob1xcdYdnPLNduSoZwGPvjKZrHypbupDAr68HRDu40ZdudOOAc95r58fE4QJ7LlxX6Le9EFeSEyFaILlRpTkO0um8TkqA%2FxOtl4PdH1iJ7G3dkjxB4Z%2F6Iac50C7RCXUMAaIWwes%2BRzyjEJ0HR2vDVuaJlpKczEnkYAOxGFngXUp842JE%2FBHWgZ8Rpjy3NUPgvxFkxT220dSOO0b69KzPnr7yQqJ2T8qmsUozFWeVFmyfJh1Q9b2MXjnA38Y6stFvh3EY%2F9ZN%2BHFOlWIlUCl12fVfMvN56Sdet5tHaOWUTVlkYFi958%2FJN5IlxEs6g%3D%3D  
+
+[debug] [2019-03-30T06:15:03.215Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2019-03-30T06:15:03.217Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/cloud-firestore-workshop-bbac5/locations/-/functions  
+ 
+[debug] [2019-03-30T06:15:04.097Z] <<< HTTP RESPONSE 200
+[info] i  functions: creating Node.js 6 function computeAverageReview(us-central1)...
+[debug] [2019-03-30T06:15:04.099Z] Trigger is:  {"eventTrigger":{"resource":"projects/cloud-firestore-workshop-bbac5/databases/(default)/documents/reviews/{reviewId}","eventType":"providers/cloud.firestore/eventTypes/document.write","service":"firestore.googleapis.com"}}
+[debug] [2019-03-30T06:15:04.102Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/cloud-firestore-workshop-bbac5/locations/us-central1/functions  
+
+[debug] [2019-03-30T06:15:05.223Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:05.225Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:05.941Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:07.945Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:08.705Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:10.710Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:11.448Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:13.454Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:14.234Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:16.237Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:16.967Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:18.972Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:19.672Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:21.673Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:22.377Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:24.382Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:25.125Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:27.127Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:27.568Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:29.575Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:30.311Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-30T06:15:32.315Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/Y2xvdWQtZmlyZXN0b3JlLXdvcmtzaG9wLWJiYWM1L3VzLWNlbnRyYWwxL2NvbXB1dGVBdmVyYWdlUmV2aWV3L1BoN0RIZ2tzaDNj  
+ 
+[debug] [2019-03-30T06:15:33.068Z] <<< HTTP RESPONSE 200
+[info] ✔  functions[computeAverageReview(us-central1)]: Successful create operation. 
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Please note that it can take up to 30 seconds for your updated functions to propagate.
+[info] Project Console: https://console.firebase.google.com/project/cloud-firestore-workshop-bbac5/overview
