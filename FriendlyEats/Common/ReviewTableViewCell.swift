@@ -54,35 +54,54 @@ class ReviewTableViewCell: UITableViewCell {
 
   @IBAction func yumWasTapped(_ sender: Any) {
     let reviewReference = Firestore.firestore().collection("reviews").document(review.documentID)
-    reviewReference.getDocument { (snapshot, error) in
-      if let error = error {
-        print("Got an error fetching the document: \(error)")
-        return
+    Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+
+      // TODO: 1. Get the latest review from the database
+      let reviewSnapshot: DocumentSnapshot
+      do {
+        try reviewSnapshot = transaction.getDocument(reviewReference)
+      } catch let error as NSError {
+        errorPointer?.pointee = error
+        return nil
       }
-      guard let snapshot = snapshot else { return }
-      guard let review = Review(document: snapshot) else { return }
-      print("Right now, this review has \(review.yumCount) yums")
-      let newYumCount = review.yumCount + 1
-      // The rest of the code will go here!
-      guard let currentUser = Auth.auth().currentUser else { return }
-      // First we are going to write a simple "Yum" object into our subcollection...
+
+      // TODO: 2. Perform any internal logic
+      // We can convert our snapshot to a review object
+      guard let latestReview = Review(document: reviewSnapshot) else {
+        let error = NSError(domain: "FriendlyEatsErrorDomain", code: 0, userInfo: [
+          NSLocalizedDescriptionKey: "Review at \(reviewReference.path) didn't look like a valid review"
+          ])
+        errorPointer?.pointee = error
+        return nil
+      }
+
+      guard let currentUser = Auth.auth().currentUser else {
+        let error = NSError(domain: "FriendlyEatsErrorDomain", code: 0, userInfo: [
+          NSLocalizedDescriptionKey: "You need to be signed in to Yum a review"
+          ])
+        errorPointer?.pointee = error
+        return nil
+      }
+
+      // Finally, we can update the "Yum" count
+      let newYumCount = latestReview.yumCount + 1
+
+      // TODO: 3. Write the new Yum object to our subcollection
+      // Next we are going to write a simple "Yum" object into our subcollection...
       let newYum = Yum(documentID: currentUser.uid, username: currentUser.displayName ?? "Unknown user")
       let newYumReference = reviewReference.collection("yums").document(newYum.documentID)
-      newYumReference.setData(newYum.documentData, completion: { (error) in
-        if let error = error {
-          print("Got an error adding the new yum document: \(error)")
-        } else {
-          print("Document set successfully")
-          // TODO: Update the yumCount here
-          reviewReference.updateData(["yumCount": newYumCount]) { (error) in
-            if let error = error {
-              print("Got an error updating the review count: \(error)")
-            } else {
-              print("yumCount incremented successfully")
-            }
-          }
-        }
-      })
+      transaction.setData(newYum.documentData, forDocument: newYumReference)
+
+      // TODO: 4. Update the yumCount
+      transaction.updateData(["yumCount": newYumCount], forDocument: reviewReference)
+
+      return nil
+    })  { (_, error) in
+      if let error = error {
+        print("Got an error attempting the transaction: \(error)")
+      } else {
+        print("Transaction successful!")
+      }
     }
   }
 
