@@ -64,17 +64,16 @@ class NewReviewViewController: UIViewController, UITextFieldDelegate {
                         text: reviewTextField.text!,
                         date: Date(),
                         yumCount: 0)
-    // Add this section here
-    Firestore.firestore().collection("reviews").document(review.documentID)
-      .setData(review.documentData) { error in
+    Firestore.firestore().reviews.document(review.documentID)
+      .setData(review.documentData) { (error) in
         if let error = error {
-          print("Error writing new review: \(error)")
+          print(error)
         } else {
-          // Pop the review controller on success
-          if self.navigationController?.topViewController == self {
-            self.navigationController?.popViewController(animated: true)
-          }
+          print("Write confirmed by the server!")
         }
+    }
+    if self.navigationController?.topViewController?.isKind(of: NewReviewViewController.self) ?? false {
+      self.navigationController?.popViewController(animated: true)
     }
   }
 
