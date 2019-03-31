@@ -53,6 +53,20 @@ class ReviewTableViewCell: UITableViewCell {
   }
 
   @IBAction func yumWasTapped(_ sender: Any) {
+    guard let currentUser = Auth.auth().currentUser else {
+      print("You need to be signed in to Yum a review!")
+      return
+    }
+    let pendingYum = ["review": review.documentID,
+                      "userID": currentUser.uid,
+                      "userName": currentUser.displayName ?? "Anonymous"]
+    Firestore.firestore().collection("pendingYums").addDocument(data: pendingYum)
+
+    // We can "fake" the data if we're offline.
+    review.yumCount += 1
+    showYumText()
+
+    /*
     let reviewReference = Firestore.firestore().collection("reviews").document(review.documentID)
     Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
 
@@ -103,6 +117,7 @@ class ReviewTableViewCell: UITableViewCell {
         print("Transaction successful!")
       }
     }
+ */
   }
 
 }
