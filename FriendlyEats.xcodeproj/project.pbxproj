@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		263F4BC3225082D10055CA59 /* LazyRestaurantTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263F4BC2225082D10055CA59 /* LazyRestaurantTableViewDataSource.swift */; };
 		2690701E224D01770006447A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2690701D224D01770006447A /* GoogleService-Info.plist */; };
 		360549AC2028D56E0090317C /* EditRestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360549AB2028D56E0090317C /* EditRestaurantViewController.swift */; };
 		496B609A203363A9005AD625 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6099203363A9005AD625 /* ReviewTableViewCell.swift */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		00B73D5D826CE34E44902A50 /* Pods_FriendlyEats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendlyEats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		159A6C33CE6A0629F79672BE /* Pods_FriendlyEatsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FriendlyEatsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		263F4BC2225082D10055CA59 /* LazyRestaurantTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyRestaurantTableViewDataSource.swift; sourceTree = "<group>"; };
 		2690701D224D01770006447A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		360549AB2028D56E0090317C /* EditRestaurantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRestaurantViewController.swift; sourceTree = "<group>"; };
 		496B6099203363A9005AD625 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				8DDCD363203261A500CFBF60 /* RestaurantTableViewDataSource.swift */,
 				496B6099203363A9005AD625 /* ReviewTableViewCell.swift */,
 				499D896F203CD176009C067E /* Utils.swift */,
+				263F4BC2225082D10055CA59 /* LazyRestaurantTableViewDataSource.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				8D6014FC202B8B23003E8091 /* ProfileViewController.swift in Sources */,
 				8D5DF7021F7EF3BA00B0D24F /* NewReviewViewController.swift in Sources */,
 				8DDCD366203277CA00CFBF60 /* AddRestaurantViewController.swift in Sources */,
+				263F4BC3225082D10055CA59 /* LazyRestaurantTableViewDataSource.swift in Sources */,
 				49C24867202A237000D6008A /* HackPageViewController.swift in Sources */,
 				8DF1E3131EE5CFF900192CDE /* Restaurant.swift in Sources */,
 				8DF77E1A1EEB45E500CB2330 /* RestaurantDetailViewController.swift in Sources */,

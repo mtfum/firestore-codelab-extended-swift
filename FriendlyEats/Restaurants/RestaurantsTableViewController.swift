@@ -31,24 +31,23 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
 
   let backgroundView = UIImageView()
 
-  lazy private var dataSource: RestaurantTableViewDataSource = {
+  lazy private var dataSource: LazyRestaurantTableViewDataSource = {
     return dataSourceForQuery(baseQuery)
   }()
 
   fileprivate var query: Query? {
     didSet {
-      dataSource.stopUpdates()
       tableView.dataSource = nil
       if let query = query {
         dataSource = dataSourceForQuery(query)
         tableView.dataSource = dataSource
-        dataSource.startUpdates()
+        dataSource.fetchNext() // Add this line
       }
     }
   }
 
-  private func dataSourceForQuery(_ query: Query) -> RestaurantTableViewDataSource {
-    return RestaurantTableViewDataSource(query: query) { [unowned self] (changes) in
+  private func dataSourceForQuery(_ query: Query) -> LazyRestaurantTableViewDataSource {
+    return LazyRestaurantTableViewDataSource(query: query) { [unowned self] in
       if self.dataSource.count > 0 {
         self.tableView.backgroundView = nil
       } else {
@@ -84,23 +83,14 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
     self.navigationController?.navigationBar.barStyle = .black
 
     // Uncomment these two lines to enable SECRET HACKER PAGE!!!
-    // let omgHAX = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(goToHackPage))
-    // navigationItem.rightBarButtonItems?.append(omgHAX)
+     let omgHAX = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(goToHackPage))
+     navigationItem.rightBarButtonItems?.append(omgHAX)
   }
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.setNeedsStatusBarAppearanceUpdate()
-    dataSource.startUpdates()
-  }
-
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    dataSource.stopUpdates()
-  }
-
-  deinit {
-    dataSource.stopUpdates()
+    dataSource.fetchNext()
   }
 
   @IBAction func didTapPopulateButton(_ sender: Any) {
@@ -148,7 +138,18 @@ class RestaurantsTableViewController: UIViewController, UITableViewDelegate {
     let controller = RestaurantDetailViewController.fromStoryboard(restaurant: restaurant)
     self.navigationController?.pushViewController(controller, animated: true)
   }
+}
 
+extension RestaurantsTableViewController: UIScrollViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // Load more restaurants if the user is 100 points away from scrolling to the bottom.
+    let height = scrollView.frame.size.height + 100
+    let contentYoffset = scrollView.contentOffset.y
+    let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+    if distanceFromBottom < height {
+      dataSource.fetchNext()
+    }
+  }
 }
 
 extension RestaurantsTableViewController: FiltersViewControllerDelegate {
