@@ -91,16 +91,14 @@ class EditRestaurantViewController: UIViewController, UINavigationControllerDele
       data["photoURL"] = downloadUrl
     }
 
-    Firestore.firestore()
-      .collection("restaurants")
-      .document(restaurant.documentID)
-      .updateData(data) { err in
-        if let err = err {
-          print("Error writing document: \(err)")
-        } else {
-          self.presentDidSaveAlert()
-        }
+    Firestore.firestore().collection("restaurants").document(restaurant.documentID).updateData(data) { err in
+      if let err = err {
+        print("Error writing document: \(err)")
+      } else {
+        self.presentDidSaveAlert()
+      }
     }
+
   }
 
   // MARK: Setting up pickers
